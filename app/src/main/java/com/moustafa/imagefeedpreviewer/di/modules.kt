@@ -2,7 +2,7 @@ package com.moustafa.imagefeedpreviewer.di
 
 import com.moustafa.imagefeedpreviewer.BuildConfig
 import com.moustafa.imagefeedpreviewer.repository.NetworkFactory
-import com.moustafa.imagefeedpreviewer.repository.UnsplashService
+import com.moustafa.imagefeedpreviewer.repository.unsplash.UnsplashService
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -12,16 +12,10 @@ import org.koin.dsl.module
  * created on Wednesday, 18 Sep, 2019
  */
 val repositoryModule: Module = module {
+
     single { NetworkFactory.makeHttpClient(androidContext()) }
 
     single<UnsplashService> { NetworkFactory.makeServiceFactory(get()) }
-    single {
-        NetworkFactory.makeRetrofit(BuildConfig.BASE_API_URL, get())
-    }
-//    single<Repository> { RepositoryImpl(get()) }
-}
-val viewModelsModule = module {
-    //    viewModel {
-//        RecipesListViewModel(repository = get())
-//    }
+
+    single { NetworkFactory.makeRetrofit(BuildConfig.BASE_API_URL, get()) }
 }
