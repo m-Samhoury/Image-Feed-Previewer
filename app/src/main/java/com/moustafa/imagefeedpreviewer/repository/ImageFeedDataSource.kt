@@ -39,15 +39,17 @@ class ImageFeedDataSource<T>(
             return
         }
 
-        networkState.postValue(StateMonitor.Loading)
-
         scope.launch {
+            networkState.postValue(StateMonitor.Loading)
             val photosList = imageFeedAdapter.fetchImages(
                 perPage = params.requestedLoadSize,
                 page = 1
             ) {
                 networkState.postValue(StateMonitor.Failed(it, retry))
             }
+
+            networkState.postValue(StateMonitor.Loaded(photosList?.photos ?: listOf()))
+
             callback.onResult(
                 photosList?.photos ?: listOf(),
                 0,
@@ -55,7 +57,6 @@ class ImageFeedDataSource<T>(
                 null,
                 2
             )
-            networkState.postValue(StateMonitor.Loaded(photosList.photos))
         }
     }
 

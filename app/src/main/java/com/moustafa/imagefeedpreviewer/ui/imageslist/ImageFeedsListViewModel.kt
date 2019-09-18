@@ -8,6 +8,7 @@ import com.moustafa.imagefeedpreviewer.models.PhotoInfoUnsplashResponse
 import com.moustafa.imagefeedpreviewer.repository.ImageFeedAdapter
 import com.moustafa.imagefeedpreviewer.repository.ImageFeedDataSourceFactory
 import com.moustafa.imagefeedpreviewer.repository.StateMonitor
+import kotlinx.coroutines.launch
 
 /**
  * @author moustafasamhoury
@@ -57,6 +58,7 @@ class ImageFeedsListViewModel(
         mediatorLiveData.addSource(liveData) {
             mediatorLiveData.value = it
         }
+
         imageFeedsListState = mediatorLiveData
     }
 
