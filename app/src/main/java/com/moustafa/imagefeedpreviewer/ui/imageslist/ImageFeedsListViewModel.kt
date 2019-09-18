@@ -64,7 +64,7 @@ class ImageFeedsListViewModel(
 
     private fun initializedPagedListBuilder(): LiveData<PagedList<PhotoInfo>> {
         val config = PagedList.Config.Builder()
-            .setInitialLoadSizeHint(60)
+            .setInitialLoadSizeHint(20)
             .setPageSize(20)
             .setPrefetchDistance(20)
             .setMaxSize(80)

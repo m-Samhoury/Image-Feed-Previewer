@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.moustafa.imagefeedpreviewer.R
 import com.moustafa.imagefeedpreviewer.models.PhotoInfo
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_feed_image.view.*
 
 /**
@@ -48,14 +47,9 @@ class ReposListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(photoInfo: PhotoInfo?) {
         if (photoInfo != null) {
-//            itemView.imageViewPhoto.load(getSuitableImageUrl(photoInfo)) {
-//                crossfade(true)
-//            }
-            Picasso.get()
-                .load(getSuitableImageUrl(photoInfo))
-                .into(itemView.imageViewPhoto)
-
-            itemView.imageViewPhoto.aspectRatio = photoInfo.aspectRatio
+            itemView.imageViewPhoto.load(getSuitableImageUrl(photoInfo)) {
+                crossfade(true)
+            }
 
             if (photoInfo.mainColor?.isNotBlank() == true) {
                 itemView.imageViewPhoto.layoutParams.apply {
@@ -69,7 +63,6 @@ class ReposListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         } else {
             itemView.imageViewPhoto.setImageDrawable(null)
             itemView.imageViewPhoto.setBackgroundColor(Color.RED)
-            itemView.imageViewPhoto.aspectRatio = -1.0
         }
     }
 

@@ -21,6 +21,9 @@ class ImageFeedDataSourceFactory<T>(
     private val adapter: ImageFeedAdapter<T>,
     private val networkState: MutableLiveData<StateMonitor<List<PhotoInfo>>>
 ) : DataSource.Factory<Int, PhotoInfo>() {
+    init {
+        create()
+    }
 
     override fun create(): DataSource<Int, PhotoInfo> =
         ImageFeedDataSource(scope, adapter, networkState)
@@ -31,6 +34,6 @@ class ImageFeedDataSourceFactory<T>(
             adapter: ImageFeedAdapter<T>,
             errorsLiveData: MutableLiveData<StateMonitor<List<PhotoInfo>>>
         ) =
-            ImageFeedDataSource(scope, adapter, errorsLiveData)
+            ImageFeedDataSourceFactory(scope, adapter, errorsLiveData)
     }
 }

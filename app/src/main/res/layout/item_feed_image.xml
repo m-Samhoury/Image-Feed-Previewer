@@ -11,7 +11,7 @@
     <!--        android:layout_height="wrap_content"-->
     <!--        android:layout_gravity="end|bottom" />-->
 
-    <com.moustafa.imagefeedpreviewer.utils.AspectRatioImageView
+    <ImageView
         android:id="@+id/imageViewPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
