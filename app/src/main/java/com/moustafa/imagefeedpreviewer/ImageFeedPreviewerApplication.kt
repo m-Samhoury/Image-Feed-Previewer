@@ -2,6 +2,7 @@ package com.moustafa.imagefeedpreviewer
 
 import android.app.Application
 import com.moustafa.imagefeedpreviewer.di.repositoryModule
+import com.moustafa.imagefeedpreviewer.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
@@ -27,7 +28,7 @@ class ImageFeedPreviewerApplication : Application() {
             androidFileProperties()
 
 
-            modules(repositoryModule)//, viewModelsModule)
+            modules(listOf(repositoryModule, viewModelsModule))
         }
     }
 }

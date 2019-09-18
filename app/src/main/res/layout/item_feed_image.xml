@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progressBarLoadingImage"-->
+    <!--        style="?android:progressBarStyleSmall"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="end|bottom" />-->
+
+    <com.moustafa.imagefeedpreviewer.utils.AspectRatioImageView
+        android:id="@+id/imageViewPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        tools:background="@color/colorPrimary"
+        tools:ignore="ContentDescription"
+        tools:layout_height="80dp"
+        tools:layout_width="80dp" />
+
+
+</FrameLayout>

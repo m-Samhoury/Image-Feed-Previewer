@@ -13,6 +13,10 @@ data class PhotoInfoUnsplashResponse(
     val id: String? = null,
     @field:Json(name = "color")
     val mainColor: String? = null,
+//    @field:Json(name = "width")
+//    val width: Int? = null,
+//    @field:Json(name = "height")
+//    val height: Int? = null,
     @field:Json(name = "alt_description")
     val description: String? = null,
     @field:Json(name = "urls")
@@ -21,8 +25,10 @@ data class PhotoInfoUnsplashResponse(
 
 @JsonClass(generateAdapter = true)
 data class ImageUrls(
+    @field:Json(name = "thumb")
+    val thumbnail: String? = null,
     @field:Json(name = "small")
-    val small: String,
+    val small: String? = null,
     @field:Json(name = "full")
-    val full: String
+    val full: String? = null
 )

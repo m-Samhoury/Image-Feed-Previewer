@@ -1,11 +1,12 @@
 package com.moustafa.imagefeedpreviewer.repository
 
 import android.content.Context
+import coil.util.CoilUtils
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.squareup.moshi.Moshi
-import okhttp3.Cache
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -23,6 +24,7 @@ object NetworkFactory {
     fun makeHttpClient(context: Context): OkHttpClient =
         makeHttpClientBuilder(context)
             .addInterceptor(ChuckerInterceptor(context))
+            .addInterceptor(HttpLoggingInterceptor())
             .build()
 
     fun makeHttpClientBuilder(context: Context): OkHttpClient.Builder =
@@ -31,9 +33,8 @@ object NetworkFactory {
             .readTimeout(TIME_OUTS, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUTS, TimeUnit.SECONDS)
             .certificatePinner(CertificatePinner.DEFAULT)
-            .cache(Cache(context.cacheDir, 10 * 1024 * 1024))
+            .cache(CoilUtils.createDefaultCache(context))
             .retryOnConnectionFailure(false)
-
 
     fun createMoshiInstance() = Moshi.Builder()
         .build()

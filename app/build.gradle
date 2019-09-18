@@ -65,7 +65,7 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
-    implementation "com.squareup.okhttp3:okhttp:4.0.1"
+    implementation "com.squareup.okhttp3:okhttp:4.2.0"
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation "com.squareup.moshi:moshi:$moshi_version"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
@@ -76,16 +76,18 @@ dependencies {
 
     debugImplementation "com.github.ChuckerTeam.Chucker:library:3.0.1"
     releaseImplementation "com.github.ChuckerTeam.Chucker:library-no-op:3.0.1"
+    implementation("com.squareup.okhttp3:logging-interceptor:4.2.0")
 
     implementation 'androidx.fragment:fragment-ktx:1.1.0'
     implementation "androidx.activity:activity-ktx:1.0.0"
 
     implementation("io.coil-kt:coil:0.7.0")
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation "androidx.navigation:navigation-fragment-ktx:2.1.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.1.0"
 
     implementation "androidx.paging:paging-runtime-ktx:2.1.0"
-
+    implementation "androidx.paging:paging-rxjava2-ktx:2.1.0"
 
 }

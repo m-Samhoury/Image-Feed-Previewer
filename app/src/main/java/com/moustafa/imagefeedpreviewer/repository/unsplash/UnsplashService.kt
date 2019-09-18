@@ -19,6 +19,7 @@ interface UnsplashService {
     @Headers("Authorization: Client-ID ${BuildConfig.API_ACCESS_KEY}")
     @GET("photos")
     suspend fun fetchUnsplashImagesList(
-        @Query("page") contentType: Int
+        @Query("per_page") perPage: Int,
+        @Query("page") page: Int
     ): Response<List<PhotoInfoUnsplashResponse>>
 }

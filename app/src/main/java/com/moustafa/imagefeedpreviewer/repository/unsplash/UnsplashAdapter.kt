@@ -1,6 +1,7 @@
 package com.moustafa.imagefeedpreviewer.repository.unsplash
 
 import com.moustafa.imagefeedpreviewer.models.PhotoInfo
+import com.moustafa.imagefeedpreviewer.models.PhotoInfoList
 import com.moustafa.imagefeedpreviewer.models.PhotoInfoUnsplashResponse
 import com.moustafa.imagefeedpreviewer.repository.ImageFeedAdapter
 
@@ -17,21 +18,41 @@ class UnsplashAdapter(private val service: UnsplashService) :
             id = it.id!!,
             mainColor = it.mainColor,
             description = it.description,
+//            width = it.width,
+//            height = it.height,
             fullImageUrl = it.imageUrls?.full,
-            smallImageUrl = it.imageUrls?.small!!
+            smallImageUrl = it.imageUrls?.thumbnail!!
         )
     }
 
-    override suspend fun fetchImages(page: Int, onError: (Exception) -> Any): List<PhotoInfo>? {
-        val result = safeApiCall({
-            service.fetchUnsplashImagesList(1)
+    override suspend fun fetchImages(
+        perPage: Int,
+        page: Int,
+        onError: (Exception) -> Any
+    ): PhotoInfoList {
+        val resultAndHeaderPair = safeApiCallWithHeader({
+            service.fetchUnsplashImagesList(perPage = perPage, page = page)
         }, onError)
-        return result
+        val result = resultAndHeaderPair.first
+        val headers = resultAndHeaderPair.second
+        val photos = result
             ?.filter {
                 it.id?.isNotBlank() == true
                         &&
                         (it.imageUrls?.small?.isNotBlank() == true
                                 || it.imageUrls?.full?.isNotBlank() == true)
-            }?.map(mapper)
+            }?.map(mapper) ?: emptyList()
+
+        val totalPhotosCountString = headers?.get("x-total")
+        val totalPhotosResults =
+            if (totalPhotosCountString?.isNotBlank() == true) Integer.parseInt(
+                totalPhotosCountString
+            )
+            else photos.size
+
+        return PhotoInfoList(
+            photos = photos,
+            totalPhotosResults = totalPhotosResults
+        )
     }
 }

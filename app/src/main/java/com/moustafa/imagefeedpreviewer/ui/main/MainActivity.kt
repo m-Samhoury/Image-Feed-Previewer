@@ -15,7 +15,9 @@ import com.moustafa.imagefeedpreviewer.R
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private val appBarConfiguration = AppBarConfiguration(emptySet())
+    private val appBarConfiguration = AppBarConfiguration(
+        setOf(R.id.imageFeedsListFragment)
+    )
 
     override fun onStart() {
         super.onStart()
