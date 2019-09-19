@@ -31,7 +31,6 @@ class ImageFeedsListFragment : Fragment(R.layout.fragment_image_feeds_list) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         imageFeedsListViewModel.imageFeedsListState.observe(this, Observer {
-            Log.d("ImageFeedsListFragment", "State:${it.stateMonitor::class.java}")
             handleState(it)
         })
     }

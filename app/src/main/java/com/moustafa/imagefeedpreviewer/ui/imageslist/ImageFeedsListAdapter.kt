@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
 import com.bumptech.glide.Glide
 import com.moustafa.imagefeedpreviewer.R
 import com.moustafa.imagefeedpreviewer.models.PhotoInfo

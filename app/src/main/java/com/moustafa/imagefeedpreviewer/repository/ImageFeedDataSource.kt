@@ -33,9 +33,7 @@ class ImageFeedDataSource<T>(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, PhotoInfo>
     ) {
-        Log.d("ImageFeedDataSource", "loadInitial()")
         if (networkState.value == StateMonitor.Loading) {
-            Log.d("ImageFeedDataSource", "loadInitial() called while statemonitor is loading")
             return
         }
 
@@ -60,24 +58,18 @@ class ImageFeedDataSource<T>(
     @SuppressLint("CheckResult")
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, PhotoInfo>) {
         if (networkState.value == StateMonitor.Loading) {
-            Log.d("ImageFeedDataSource", "loadAfter() called while statemonitor is loading")
             return
         }
 
         networkState.postValue(StateMonitor.Loading)
 
         scope.launch {
-            Log.d("ImageFeedDataSource", "loadAfter()")
-
             val photosList = imageFeedAdapter.fetchImages(
                 perPage = params.requestedLoadSize, page = params.key
             ) {
                 networkState.postValue(StateMonitor.Failed(it, retry))
             }
-            Log.d(
-                "ImageFeedDataSource",
-                "loadAfter callback.onResult called with photolist size: ${photosList?.photos?.size}"
-            )
+
             if (photosList != null) {
                 callback.onResult(photosList?.photos, params.key + 1)
             }
@@ -87,24 +79,18 @@ class ImageFeedDataSource<T>(
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, PhotoInfo>) {
         if (networkState.value == StateMonitor.Loading) {
-            Log.d("ImageFeedDataSource", "loadBefore() called while statemonitor is loading")
             return
         }
 
         networkState.postValue(StateMonitor.Loading)
 
         scope.launch {
-            Log.d("ImageFeedDataSource", "loadBefore()")
-
             val photosList = imageFeedAdapter.fetchImages(
                 perPage = params.requestedLoadSize, page = params.key
             ) {
                 networkState.postValue(StateMonitor.Failed(it, retry))
             }
-            Log.d(
-                "ImageFeedDataSource",
-                "loadBefore callback.onResult called with photolist size: ${photosList?.photos?.size}"
-            )
+
             if (photosList != null) {
                 callback.onResult(photosList.photos, if (params.key > 1) params.key - 1 else null)
             }
