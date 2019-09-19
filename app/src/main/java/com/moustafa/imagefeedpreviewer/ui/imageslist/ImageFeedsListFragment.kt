@@ -3,12 +3,14 @@ package com.moustafa.imagefeedpreviewer.ui.imageslist
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.moustafa.imagefeedpreviewer.R
 import com.moustafa.imagefeedpreviewer.repository.StateMonitor
+import com.moustafa.imagefeedpreviewer.utils.px
 import kotlinx.android.synthetic.main.fragment_image_feeds_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -59,6 +61,16 @@ class ImageFeedsListFragment : Fragment(R.layout.fragment_image_feeds_list) {
     }
 
     private fun setupViews() {
+        ViewCompat.setOnApplyWindowInsetsListener(recyclerViewImagesList) { _, insets ->
+            recyclerViewImagesList.setPadding(
+                0,
+                insets.systemWindowInsetTop + 16.px(),
+                0,
+                0
+            )
+            insets.consumeSystemWindowInsets()
+        }
+
         (recyclerViewImagesList.itemAnimator as DefaultItemAnimator).supportsChangeAnimations =
             false
         recyclerViewImagesList.adapter = imageFeedsListAdapter

@@ -19,21 +19,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setOf(R.id.imageFeedsListFragment)
     )
 
-    override fun onStart() {
-        super.onStart()
-        setupViews()
-    }
-
-    private fun setupViews() {
-        val host: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
-
-        setupActionBarWithNavController(
-            navController = host.navController,
-            configuration = appBarConfiguration
-        )
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
     }

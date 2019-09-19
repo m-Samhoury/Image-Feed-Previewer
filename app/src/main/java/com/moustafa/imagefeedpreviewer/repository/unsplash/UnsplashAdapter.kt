@@ -19,7 +19,7 @@ class UnsplashAdapter(private val service: UnsplashService) :
             mainColor = it.mainColor,
             description = it.description,
             fullImageUrl = it.imageUrls?.full,
-            smallImageUrl = it.imageUrls?.thumbnail!!
+            smallImageUrl = it.imageUrls?.small?:""
         )
     }
 
