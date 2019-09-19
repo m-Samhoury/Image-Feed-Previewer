@@ -42,10 +42,11 @@ class ImageFeedDataSource<T>(
         networkState.postValue(StateMonitor.Loading)
 
         scope.launch {
-            val photosList = imageFeedAdapter.fetchImages(page = 1,perPage = params.requestedLoadSize) {
-                networkState.postValue(StateMonitor.Failed(it, retry))
+            val photosList =
+                imageFeedAdapter.fetchImages(page = 1, perPage = params.requestedLoadSize) {
+                    networkState.postValue(StateMonitor.Failed(it, retry))
 
-            }
+                }
 
             if (photosList != null) {
                 callback.onResult(photosList.photos, 0, 2)
@@ -105,7 +106,7 @@ class ImageFeedDataSource<T>(
                 "loadBefore callback.onResult called with photolist size: ${photosList?.photos?.size}"
             )
             if (photosList != null) {
-                callback.onResult(photosList.photos, params.key - 1)
+                callback.onResult(photosList.photos, if (params.key > 1) params.key - 1 else null)
             }
             networkState.value = StateMonitor.Loaded(photosList?.photos ?: emptyList())
         }

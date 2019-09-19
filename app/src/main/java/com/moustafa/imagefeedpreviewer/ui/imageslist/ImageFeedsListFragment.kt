@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.moustafa.imagefeedpreviewer.R
 import com.moustafa.imagefeedpreviewer.repository.StateMonitor
 import kotlinx.android.synthetic.main.fragment_image_feeds_list.*
@@ -59,18 +59,15 @@ class ImageFeedsListFragment : Fragment(R.layout.fragment_image_feeds_list) {
     }
 
     private fun setupViews() {
-        recyclerViewImagesList.apply {
-            layoutManager = GridLayoutManager(
-                context,
-                6,
-                GridLayoutManager.VERTICAL,
-                false
-            )
-//                .apply {
-//                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-//            }
-            (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
-            adapter = imageFeedsListAdapter
-        }
+        (recyclerViewImagesList.itemAnimator as DefaultItemAnimator).supportsChangeAnimations =
+            false
+        recyclerViewImagesList.adapter = imageFeedsListAdapter
+        val layoutManager = StaggeredGridLayoutManager(
+            2,
+            StaggeredGridLayoutManager.VERTICAL
+        )
+        layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+
+        recyclerViewImagesList.layoutManager = layoutManager
     }
 }

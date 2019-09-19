@@ -4,22 +4,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <!--    <ProgressBar-->
-    <!--        android:id="@+id/progressBarLoadingImage"-->
-    <!--        style="?android:progressBarStyleSmall"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="end|bottom" />-->
-
-    <ImageView
+    <com.moustafa.imagefeedpreviewer.utils.AspectRatioImageView
         android:id="@+id/imageViewPhoto"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:minWidth="100dp"
+        android:minHeight="100dp"
+        android:scaleType="fitCenter"
         tools:background="@color/colorPrimary"
         tools:ignore="ContentDescription"
         tools:layout_height="80dp"
         tools:layout_width="80dp" />
-
 
 </FrameLayout>

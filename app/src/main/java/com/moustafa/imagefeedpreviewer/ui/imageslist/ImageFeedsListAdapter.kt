@@ -8,6 +8,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.bumptech.glide.Glide
 import com.moustafa.imagefeedpreviewer.R
 import com.moustafa.imagefeedpreviewer.models.PhotoInfo
 import kotlinx.android.synthetic.main.item_feed_image.view.*
@@ -47,14 +48,15 @@ class ReposListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(photoInfo: PhotoInfo?) {
         if (photoInfo != null) {
-            itemView.imageViewPhoto.load(getSuitableImageUrl(photoInfo)) {
-                crossfade(true)
-            }
+            Glide
+                .with(itemView.imageViewPhoto)
+                .load(getSuitableImageUrl(photoInfo))
+                .fitCenter()
+                .into(itemView.imageViewPhoto)
 
+            itemView.imageViewPhoto.aspectRatio = photoInfo.aspectRatio
+            itemView.imageViewPhoto.requestLayout()
             if (photoInfo.mainColor?.isNotBlank() == true) {
-                itemView.imageViewPhoto.layoutParams.apply {
-
-                }
                 val color = Color.parseColor(photoInfo.mainColor.toString())
                 itemView.imageViewPhoto.setBackgroundColor(color)
             } else {
@@ -62,7 +64,8 @@ class ReposListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
         } else {
             itemView.imageViewPhoto.setImageDrawable(null)
-            itemView.imageViewPhoto.setBackgroundColor(Color.RED)
+            itemView.imageViewPhoto.setBackgroundColor(Color.WHITE)
+            itemView.imageViewPhoto.aspectRatio = -1.0
         }
     }
 
